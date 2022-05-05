@@ -1,6 +1,7 @@
 package datastructure;
 import java.util.*;
 import java.util.LinkedList;
+
 public class Graph {
 	int node;
 	ArrayList<ArrayList<Integer>> graph;
@@ -25,7 +26,7 @@ public class Graph {
 				System.out.print("node"+i);
 				for(int x:graph.get(i))
 				{
-					System.out.print("->"+x);
+					System.out.print("-->"+x);
 				}
 				System.out.println();
 			}
@@ -39,17 +40,21 @@ public class Graph {
 			for(int j=0;j<node;j++)
 				visited[j]=false;
 			visited[start] = true;
-			for(int i=0;i<node;i++)
+			int a=0;
+			for(int i=a;i<node;i++)
 			{
+				i=start;
 			   for(int x:graph.get(i))	
 			   {   
 				   if(visited[x]==false)
 				   {
-				   System.out.print(x+" ");
-				   visited[x]=true;
+					   System.out.print(x+" ");
+					   visited[x]=true;
+					   start=x;
 				   }
 			   }
-				
+			   i=a;
+			   a++;	
 			}
 		}
 		void DFS(int start)
@@ -59,7 +64,7 @@ public class Graph {
 			{
 				visited[i]=false;
 			}
-			System.out.print("\nDFS traverse :");
+			System.out.print("DFS traverse :");
 			DFStraverse(start,visited);
 		}
 		void DFStraverse(int start,boolean visited[])
@@ -82,8 +87,10 @@ class Graph1{
 	public static void main(String args[])
 	{
 		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of vertices : ");
 		int V = sc.nextInt();
-		int E= sc.nextInt();
+		System.out.println("Enter the number of edges : ");
+		int E = sc.nextInt();
 		Graph g = new Graph(V);
 		for(int i=0;i<E;i++)
 		{
@@ -92,12 +99,17 @@ class Graph1{
 			g.addEdge(u, v);
 		}
 		g.printGraph();
-		g.BFS(0);
-		g.DFS(0);
+		System.out.println("Enter the starting vertex for BFS : ");
+		int b=sc.nextInt();
+		g.BFS(b);
+		System.out.println("\nEnter the starting vertex for DFS : ");
+		int d=sc.nextInt();
+		g.DFS(d);
 	}
 }
-//example graph
-/*5
+//example for graph
+/*
+5
 6
 0
 1
